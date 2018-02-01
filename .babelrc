@@ -1,5 +1,16 @@
 {
   "presets": [
-    "env"
+    [
+      "env",
+      {
+        "targets": {
+          "ie": 9
+        },
+        "uglify": true
+      }
+    ]
+  ],
+  "plugins": [
+    "transform-object-rest-spread"
   ]
 }

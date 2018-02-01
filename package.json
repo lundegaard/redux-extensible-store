@@ -4,19 +4,36 @@
   "description": "Provides a redux store with additional methods for dynamic reducer and saga injections. The library is suitable for CMS or Portal solutions.",
   "license": "MIT",
   "main": "/dist/index.js",
+  "module": "es/index.js",
+  "jsnext:main": "es/index.js",
   "repository": "https://github.com/lundegaard/redux-extensible-store",
+  "contributors": [
+    "Tomas Konrady <tomas.konrady@lundegaard.eu>",
+    "Jakub Kohout <jakub.kohout@lundegaard.eu>"
+  ],
   "engines": {
     "node": ">=8"
   },
+  "files": [
+    "src",
+    "es",
+    "dist"
+  ],
+  "keywords": [
+    "redux",
+    "saga",
+    "ramda"
+  ],
   "dependencies": {
     "invariant": "^2.2.2",
     "ramda": "^0.25.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "6.23.0",
+    "babel-preset-react": "^6.24.1",
     "eslint": "^4.16.0",
     "eslint-plugin-babel": "^4.1.2",
     "eslint-plugin-import": "^2.8.0",
@@ -40,7 +57,9 @@
     "redux": "3.7.2"
   },
   "scripts": {
-    "build": "rollup -c",
+    "build:es": "babel src --out-dir es",
+    "build:umd": "rollup -c",
+    "build": "yarn && yarn build:es && yarn build:umd",
     "test": "jest",
     "test:watch": "yarn test --watchAll",
     "test:coverage": "yarn test --coverage",

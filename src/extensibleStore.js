@@ -67,7 +67,7 @@ const createExtensibleStore = (preloadedState, middlewares = {}, composeEnhancer
 	const cancelSaga = key => {
 		if (!isNil(store.injectedSagas[key])) {
 			store.injectedSagas[key].task.cancel();
-			store.injectedSagas[key] = null;
+			delete store.injectedSagas[key];
 		}
 	};
 

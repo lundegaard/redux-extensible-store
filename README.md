@@ -1,12 +1,12 @@
 # redux-extensible-store
 
-Redux extension that allows you to dynamickly inject new reducers and sagas into you running application.
+Redux extension that allows you to dynamically inject new reducers and sagas into you running application.
 
 ## Why?
 
-If you are using dynamic imports or some kind of a code splitting then you probably need to register new reducers and sagas the time your JS chunk is loaded. So what does this module provides? We call these ad-hoc loaded modules a widgets. 
+If you are using dynamic imports or some kind of a code splitting then you probably need to register new reducers and sagas at the time your JS chunk is loaded. So what does this module provides? We call these ad-hoc loaded modules a widgets. 
 
-* `createExtensibleStore` function that returns redux store that is able to dynamicly inject reducers and sagas
+* `createExtensibleStore` function that returns redux store that is able to dynamically inject reducers and sagas
 * `injectReducers` redux action that allows you to extend your existing store with new reducers
 * `injectSaga` redux action that allows you to run new saga, for example when your component mounts 
 * `cancelSaga` redux action that allows you to cancel running saga, for example when you component unmounts
