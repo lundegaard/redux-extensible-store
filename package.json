@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "0.1.0",
   "name": "redux-extensible-store",
   "description": "Provides a redux store with additional methods for dynamic reducer and saga injections. The library is suitable for CMS or Portal solutions.",
   "license": "MIT",
