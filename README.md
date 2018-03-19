@@ -4,11 +4,11 @@ Redux extension that allows you to dynamically inject new reducers and sagas int
 
 ## Why?
 
-If you are using dynamic imports or some kind of a code splitting then you probably need to register new reducers and sagas at the time your JS chunk is loaded. So what does this module provides? We call these ad-hoc loaded modules a widgets. 
+If you are using dynamic imports or some kind of a code splitting then you probably need to register new reducers and sagas at the time your JS chunk is loaded. So what does this module provides? We call these ad-hoc loaded modules a widgets.
 
 * `createExtensibleStore` function that returns redux store that is able to dynamically inject reducers and sagas
 * `injectReducers` redux action that allows you to extend your existing store with new reducers
-* `injectSaga` redux action that allows you to run new saga, for example when your component mounts 
+* `injectSaga` redux action that allows you to run new saga, for example when your component mounts
 * `cancelSaga` redux action that allows you to cancel running saga, for example when you component unmounts
 
 ## Installation
@@ -42,7 +42,7 @@ const store = createExtensibleStore(
 `createExtensibleStore` function takes 3 __optional__ arguments:
 
    * `preloadedState`: an initial redux state
-   * `middlewares`: an object containing optional middlewares, when using sagas be carefull to name the necessary middleware as a _sagaMiddleware_ 
+   * `middlewares`: an object containing optional middlewares, when using sagas be carefull to name the necessary middleware as a _sagaMiddleware_
    * `composeEnhancers`: you might want to use `window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})` function for development environment, if not you don't need to specify that argument
 
 __To inject reducers and sagas in your Root component that is dynamically imported in you application__

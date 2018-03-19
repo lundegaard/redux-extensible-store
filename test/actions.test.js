@@ -1,28 +1,37 @@
-import { ACTIONS, injectReducers, injectSaga, cancelSaga } from '../src/actions';
+import { injectReducers, removeReducers, injectSaga, cancelSaga } from '../src/actions';
+import ActionTypes from '../src/ActionTypes';
 
-describe('Test actions structure', () => {
-  const dummyReducer = (state, action) => state;
-  const sagaDescriptor = { key: 'DummyWidget/DummySaga', saga: {} };
+describe('Test action structure', () => {
+	const dummyReducer = (state) => state;
+	const sagaDescriptor = { key: 'DummyWidget/DummySaga', saga: {} };
 
-  it('injectReducers has proper structure', () => {
-    const reducers = { dummy: dummyReducer };
-    expect(injectReducers(reducers)).toEqual({
-      type: ACTIONS.INJECT_REDUCERS,
-      payload: reducers,
-    });
-  });
+	it('injectReducers has proper structure', () => {
+		const reducers = { dummy: dummyReducer };
 
-  it('injectReducers has proper structure', () => {
-    expect(injectSaga(sagaDescriptor)).toEqual({
-      type: ACTIONS.INJECT_SAGA,
-      payload: sagaDescriptor,
-    });
-  });
+		expect(injectReducers(reducers)).toEqual({
+			type: ActionTypes.INJECT_REDUCERS,
+			payload: reducers,
+		});
+	});
 
-  it('injectReducers has proper structure', () => {
-    expect(cancelSaga(sagaDescriptor.key)).toEqual({
-      type: ACTIONS.CANCEL_SAGA,
-      payload: sagaDescriptor.key,
-    });
-  });
+	it('removeReducers has proper structure', () => {
+		expect(removeReducers(['a'])).toEqual({
+			type: ActionTypes.REMOVE_REDUCERS,
+			payload: ['a'],
+		});
+	});
+
+	it('injectReducers has proper structure', () => {
+		expect(injectSaga(sagaDescriptor)).toEqual({
+			type: ActionTypes.INJECT_SAGA,
+			payload: sagaDescriptor,
+		});
+	});
+
+	it('injectReducers has proper structure', () => {
+		expect(cancelSaga(sagaDescriptor.key)).toEqual({
+			type: ActionTypes.CANCEL_SAGA,
+			payload: sagaDescriptor.key,
+		});
+	});
 });

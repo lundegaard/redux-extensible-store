@@ -60,7 +60,7 @@
     "build:es": "babel src --out-dir es",
     "build:umd": "rollup -c",
     "build": "yarn && yarn build:es && yarn build:umd",
-    "test": "jest",
+    "test": "jest ./test",
     "test:watch": "yarn test --watchAll",
     "test:coverage": "yarn test --coverage",
     "lint": "eslint .js --cache",
