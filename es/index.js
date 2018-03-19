@@ -16,12 +16,12 @@ Object.keys(_actions).forEach(function (key) {
   });
 });
 
-var _extensibleStore = require('./extensibleStore');
+var _createExtensibleStore = require('./createExtensibleStore');
 
 Object.defineProperty(exports, 'createExtensibleStore', {
   enumerable: true,
   get: function get() {
-    return _interopRequireDefault(_extensibleStore).default;
+    return _interopRequireDefault(_createExtensibleStore).default;
   }
 });
 

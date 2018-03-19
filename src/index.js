@@ -1,2 +1,2 @@
 export * from './actions';
-export createExtensibleStore from './createExtensibleStore';
+export { default as createExtensibleStore } from './createExtensibleStore';

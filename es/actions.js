@@ -1,22 +1,25 @@
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
-// action type constants
-var ACTIONS = exports.ACTIONS = {
-	INJECT_REDUCERS: '@@injectableStore/INJECT_REDUCERS',
-	INJECT_SAGA: '@@injectableStore/INJECT_SAGA',
-	CANCEL_SAGA: '@@injectableStore/CANCEL_SAGA'
-};
+exports.cancelSaga = exports.injectSaga = exports.removeReducers = exports.injectReducers = undefined;
 
-// action type definitions
+var _ActionTypes = require('./ActionTypes');
+
+var _ActionTypes2 = _interopRequireDefault(_ActionTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var injectReducers = exports.injectReducers = function injectReducers(reducers) {
-	return { type: ACTIONS.INJECT_REDUCERS, payload: reducers };
+  return { type: _ActionTypes2.default.INJECT_REDUCERS, payload: reducers };
+};
+var removeReducers = exports.removeReducers = function removeReducers(reducersIds) {
+  return { type: _ActionTypes2.default.REMOVE_REDUCERS, payload: reducersIds };
 };
 var injectSaga = exports.injectSaga = function injectSaga(sagaDescriptor) {
-	return { type: ACTIONS.INJECT_SAGA, payload: sagaDescriptor };
+  return { type: _ActionTypes2.default.INJECT_SAGA, payload: sagaDescriptor };
 };
 var cancelSaga = exports.cancelSaga = function cancelSaga(key) {
-	return { type: ACTIONS.CANCEL_SAGA, payload: key };
+  return { type: _ActionTypes2.default.CANCEL_SAGA, payload: key };
 };
