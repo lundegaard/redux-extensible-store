@@ -1,14 +1,16 @@
-import { ACTIONS } from './actions';
+import ActionTypes from './ActionTypes';
 
 const injectionMiddleware = getStore => () => next => action => {
 	switch (action.type) {
-	case ACTIONS.INJECT_REDUCERS:
+	case ActionTypes.INJECT_REDUCERS:
 		getStore().injectReducers(action.payload);
+	case ActionTypes.REMOVE_REDUCERS:
+		getStore().removeReducers(action.payload);
 		break;
-	case ACTIONS.INJECT_SAGA:
+	case ActionTypes.INJECT_SAGA:
 		getStore().injectSaga(action.payload);
 		break;
-	case ACTIONS.CANCEL_SAGA:
+	case ActionTypes.CANCEL_SAGA:
 		getStore().cancelSaga(action.payload);
 	}
 

@@ -1,5 +1,5 @@
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
-import { identity, isNil, isEmpty, o, map, toPairs, values } from 'ramda';
+import { identity, isNil, isEmpty, o, forEach, toPairs, values } from 'ramda';
 import invariant from 'invariant';
 import injectionMiddleware from './injectionMiddleware';
 
@@ -38,9 +38,23 @@ const createExtensibleStore = (preloadedState, middlewares = {}, composeEnhancer
 	const injectReducers = reducers => {
 		o(
 			// eslint-disable-next-line no-param-reassign, no-return-assign
-			map(([id, reducer]) => (store.asyncReducers[id] = reducer)),
+			forEach(([id, reducer]) => (store.asyncReducers[id] = reducer)),
 			toPairs
 		)(reducers);
+
+		return store.replaceReducer(createReducers(store.asyncReducers));
+	};
+
+	const removeReducer = reducerId => {
+		// eslint-disable-next-line no-param-reassign, no-return-assign
+		delete store.asyncReducers[reducerId];
+
+		return store.replaceReducer(createReducers(store.asyncReducers));
+	};
+
+	const removeReducers = reducerIds => {
+		// eslint-disable-next-line no-param-reassign, no-return-assign
+		forEach((id) => delete store.asyncReducers[id])(reducerIds);
 
 		return store.replaceReducer(createReducers(store.asyncReducers));
 	};
@@ -49,7 +63,7 @@ const createExtensibleStore = (preloadedState, middlewares = {}, composeEnhancer
 	const injectSaga = ({ key, saga }) => {
 		invariant(
 			!isNil(sagaMiddleware),
-			'You must provide sagaMiddleware when using extensibleStore helper'
+			'You must provide sagaMiddleware when using createExtensibleStore helper'
 		);
 
 		if (!isNil(store.injectedSagas[key]) && store.injectedSagas[key].saga === saga) {
@@ -73,6 +87,8 @@ const createExtensibleStore = (preloadedState, middlewares = {}, composeEnhancer
 
 	store.asyncReducers = asyncReducers;
 	store.injectReducers = injectReducers;
+	store.removeReducers = removeReducers;
+	store.removeReducer = removeReducer;
 	store.injectReducer = injectReducer;
 	store.injectedSagas = injectedSagas;
 	store.injectSaga = injectSaga;

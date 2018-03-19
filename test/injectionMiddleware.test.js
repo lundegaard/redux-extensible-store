@@ -1,51 +1,52 @@
 import injectionMiddleware from '../src/injectionMiddleware';
-import { ACTIONS } from '../src/actions';
+import ActionTypes from '../src/ActionTypes';
 
 const create = () => {
-  const store = {
-    getState: jest.fn(() => ({})),
-    dispatch: jest.fn(),
-    injectReducers: jest.fn(actionPayload => {}),
-    injectSaga: jest.fn(actionPayload => {}),
-    cancelSaga: jest.fn(actionPayload => {}),
-  };
+	const store = {
+		getState: jest.fn(() => ({})),
+		dispatch: jest.fn(),
+		injectReducers: jest.fn(() => {}),
+		injectSaga: jest.fn(() => {}),
+		cancelSaga: jest.fn(() => {}),
+		removeReducers: jest.fn(() => {}),
+	};
 
-  const next = jest.fn();
+	const next = jest.fn();
 
-  const invoke = action => injectionMiddleware(() => store)()(next)(action);
+	const invoke = action => injectionMiddleware(() => store)()(next)(action);
 
-  return { store, next, invoke };
+	return { store, next, invoke };
 };
 
 describe('injectionMiddleware', () => {
-  const injectReducersAction = { type: ACTIONS.INJECT_REDUCERS, payload: 'dummyReducer' };
-  const injectSagasAction = { type: ACTIONS.INJECT_SAGA, payload: 'dummySagaDescriptor' };
-  const cancelSagaAction = { type: ACTIONS.CANCEL_SAGA, payload: 'dummySagaKey' };
+	const injectReducersAction = { type: ActionTypes.INJECT_REDUCERS, payload: 'dummyReducer' };
+	const injectSagasAction = { type: ActionTypes.INJECT_SAGA, payload: 'dummySagaDescriptor' };
+	const cancelSagaAction = { type: ActionTypes.CANCEL_SAGA, payload: 'dummySagaKey' };
 
-  it('calls injectReducers fn on store instance when injectReducers action is invoked', () => {
-    const { store, next, invoke } = create();
+	it('calls injectReducers fn on store instance when injectReducers action is invoked', () => {
+		const { store, next, invoke } = create();
 
-    invoke(injectReducersAction);
+		invoke(injectReducersAction);
 
-    expect(store.injectReducers).toHaveBeenCalledWith(injectReducersAction.payload);
-    expect(next).toHaveBeenCalled();
-  });
+		expect(store.injectReducers).toHaveBeenCalledWith(injectReducersAction.payload);
+		expect(next).toHaveBeenCalled();
+	});
 
-  it('calls injectSaga fn on store instance when injectSaga action is invoked', () => {
-    const { store, next, invoke } = create();
+	it('calls injectSaga fn on store instance when injectSaga action is invoked', () => {
+		const { store, next, invoke } = create();
 
-    invoke(injectSagasAction);
+		invoke(injectSagasAction);
 
-    expect(store.injectSaga).toHaveBeenCalledWith(injectSagasAction.payload);
-    expect(next).toHaveBeenCalled();
-  });
+		expect(store.injectSaga).toHaveBeenCalledWith(injectSagasAction.payload);
+		expect(next).toHaveBeenCalled();
+	});
 
-  it('calls cancelSaga fn on store instance when cancelSaga action is invoked', () => {
-    const { store, next, invoke } = create();
+	it('calls cancelSaga fn on store instance when cancelSaga action is invoked', () => {
+		const { store, next, invoke } = create();
 
-    invoke(cancelSagaAction);
+		invoke(cancelSagaAction);
 
-    expect(store.cancelSaga).toHaveBeenCalledWith(cancelSagaAction.payload);
-    expect(next).toHaveBeenCalled();
-  });
+		expect(store.cancelSaga).toHaveBeenCalledWith(cancelSagaAction.payload);
+		expect(next).toHaveBeenCalled();
+	});
 });
