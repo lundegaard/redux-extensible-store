@@ -1,3 +1,5 @@
+# Deprecated and not maintaned. See https://github.com/lundegaard/redux-tools as a replacement!
+
 # redux-extensible-store
 
 Redux extension that allows you to dynamically inject new reducers and sagas into you running application.
